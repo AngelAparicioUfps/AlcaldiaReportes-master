@@ -1,5 +1,6 @@
 package com.example.cristianramirez.alcaldiareportes;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,21 +10,25 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
-public class MenuPrincipal extends AppCompatActivity {
+public class MenuPrincipal extends AppCompatActivity implements View.OnClickListener{
     private SharedPreferences session;
+    int items;
 
     FloatingActionButton floatingActionButton = null;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            items=item.getItemId();
             switch (item.getItemId()) {
 
                 case R.id.item_reporte:
@@ -64,6 +69,7 @@ public class MenuPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(this);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.item_reporte);
@@ -72,4 +78,16 @@ public class MenuPrincipal extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        Intent i ;
+    if(items==R.id.item_reporte){
+            i=new Intent(getApplicationContext(), RegistrarReporte.class);
+            startActivity(i);
+        }
+        if(items==R.id.item_propuesta || items==R.id.item_perfil){
+            i=new Intent(getApplicationContext(), RegistrarPropuesta.class);
+            startActivity(i);
+        }
+    }
 }
