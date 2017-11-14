@@ -121,12 +121,15 @@ public class IniciarSesion extends AppCompatActivity implements View.OnClickList
             Intent i;
 
             if (!datosSesion.equals("")) {
-            int id=0;
+
                 try{
                     JSONObject prueba2 = new JSONObject(datosSesion);
-                    id = prueba2.getInt("id");
+
+                    int id = prueba2.getInt("id");
+                    String aux = prueba2.getString("usuario");
                     SharedPreferences.Editor edit = session.edit();
                     edit.putInt("id",id);
+                    edit.putString("user",aux);
                     edit.commit(); //Guardar cambios.
                     i = new Intent(getApplicationContext(), MenuPrincipal.class);
                     startActivity(i);

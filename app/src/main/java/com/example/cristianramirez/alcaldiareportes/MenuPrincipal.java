@@ -1,17 +1,21 @@
 package com.example.cristianramirez.alcaldiareportes;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MenuPrincipal extends AppCompatActivity {
+import org.w3c.dom.Text;
 
+public class MenuPrincipal extends AppCompatActivity {
+    private SharedPreferences session;
 
     FloatingActionButton floatingActionButton = null;
 
@@ -38,7 +42,9 @@ public class MenuPrincipal extends AppCompatActivity {
                 case R.id.item_perfil:
 
                     floatingActionButton.show();
+
                     MenuPerfil perfilFragment = new MenuPerfil();
+
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, perfilFragment).setTransition(FragmentTransaction.TRANSIT_ENTER_MASK).addToBackStack(null).commit();
 
                     return true;
@@ -61,7 +67,8 @@ public class MenuPrincipal extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.item_reporte);
-        Toast.makeText(getApplicationContext(), "hay papi si sirvio" , Toast.LENGTH_SHORT).show();
+
+
 
     }
 
