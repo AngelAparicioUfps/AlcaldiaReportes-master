@@ -43,6 +43,7 @@ public class IniciarSesion extends AppCompatActivity implements View.OnClickList
         btnIniciar = (Button) findViewById(R.id.btnIniciar);
         btnIniciar.setOnClickListener(this);
         registrese.setOnClickListener(this);
+
     }
 
 
@@ -118,6 +119,7 @@ public class IniciarSesion extends AppCompatActivity implements View.OnClickList
             datosSesion = s;
 
 
+            Log.e("onPostExecute: ",datosSesion.toString());
             Intent i;
 
             if (!datosSesion.equals("")) {

@@ -21,6 +21,7 @@ public class MenuPrincipal extends AppCompatActivity implements View.OnClickList
     int items;
 
     FloatingActionButton floatingActionButton = null;
+    TextView perfil;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -50,6 +51,7 @@ public class MenuPrincipal extends AppCompatActivity implements View.OnClickList
 
                     MenuPerfil perfilFragment = new MenuPerfil();
 
+
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, perfilFragment).setTransition(FragmentTransaction.TRANSIT_ENTER_MASK).addToBackStack(null).commit();
 
                     return true;
@@ -68,6 +70,7 @@ public class MenuPrincipal extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
+        session = getSharedPreferences("Session",0);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         floatingActionButton.setOnClickListener(this);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
