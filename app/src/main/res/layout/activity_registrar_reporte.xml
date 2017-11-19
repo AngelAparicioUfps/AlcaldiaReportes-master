@@ -35,8 +35,11 @@
 
 
                     <ImageView
+                        android:id="@+id/imagenCam"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
                         android:src="@drawable/img_camara" />
 
                 </RelativeLayout>
@@ -44,14 +47,29 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.4"
+                    android:layout_weight="0.3"
                     android:gravity="center">
 
                     <Button
+                        android:id="@+id/hacerfoto"
                         style="@style/estiloBoton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tomar fotografia" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/archivo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:typeface="sans"
+                        android:text="                       Niguna Fotografia Cargada" />
+
 
                 </LinearLayout>
 
@@ -71,6 +89,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingBottom="20dp">
+
+
 
                     <TextView
                         android:id="@+id/label_spinner"
