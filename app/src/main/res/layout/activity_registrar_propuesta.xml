@@ -35,26 +35,42 @@
 
 
                     <ImageView
+                        android:id="@+id/imagenCamp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/img_camara" />
+                        android:src="@drawable/img_camara"
+                        android:layout_gravity="center"/>
 
                 </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.4"
+                    android:layout_weight="0.3"
                     android:gravity="center">
 
                     <Button
+                        android:id="@+id/hacerfotop"
                         style="@style/estiloBoton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tomar fotografia" />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/archivop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:typeface="sans"
+                        android:text="                       Niguna Fotografia Cargada" />
 
+
+                </LinearLayout>
 
             </LinearLayout>
 

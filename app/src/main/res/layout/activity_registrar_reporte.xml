@@ -38,9 +38,9 @@
                         android:id="@+id/imagenCam"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:src="@drawable/img_camara" />
+                        android:src="@drawable/img_camara"
+                        android:layout_gravity="center"
+                        />
 
                 </RelativeLayout>
 
@@ -109,6 +109,7 @@
                         android:layout_height="wrap_content">
 
                         <android.support.design.widget.TextInputEditText
+                            android:id="@+id/txtdes"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Descripción" />
@@ -132,6 +133,7 @@
                                 android:layout_height="wrap_content">
 
                                 <android.support.design.widget.TextInputEditText
+                                    android:id="@+id/txtubi"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="Ubicación" />
@@ -168,7 +170,7 @@
                     android:gravity="center">
 
                     <Button
-                        android:id="@+id/btnIniciar"
+                        android:id="@+id/btnregistro"
                         style="@style/estiloBoton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

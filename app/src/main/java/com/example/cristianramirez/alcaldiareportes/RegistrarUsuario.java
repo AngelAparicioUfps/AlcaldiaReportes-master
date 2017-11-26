@@ -77,7 +77,7 @@ public class RegistrarUsuario extends AppCompatActivity implements View.OnClickL
 
             try {
 
-                url = new URL("http://gidis.ufps.edu.co:8088/CucutaRYP/api/usuarios");
+                url = new URL("http://gidis.ufps.edu.co:8088/CucutaRYP/api/usuario");
                 HttpURLConnection conection = (HttpURLConnection) url.openConnection();
                 conection.setRequestMethod("POST");
 
@@ -105,7 +105,7 @@ public class RegistrarUsuario extends AppCompatActivity implements View.OnClickL
                 respuesta = conection.getResponseCode();
                 Log.e("data:",respuesta+"");
                 result = new StringBuilder();
-                if (respuesta == 201) {
+                if (respuesta == 200) {
                     InputStream in = new BufferedInputStream(conection.getInputStream());
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 

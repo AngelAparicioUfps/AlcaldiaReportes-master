@@ -55,6 +55,8 @@ public class IniciarSesion extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(getApplicationContext(), "Por favor llene los campos", Toast.LENGTH_SHORT).show();
 
             }else{
+                Intent aux = new Intent(getApplicationContext(), MenuPrincipal.class);
+                startActivity(aux);
                 AccesoRemoto a = new AccesoRemoto();
                 a.execute();
             }
@@ -137,6 +139,7 @@ public class IniciarSesion extends AppCompatActivity implements View.OnClickList
                     startActivity(i);
                 }catch (Exception e){}
             }else{
+
                 Toast.makeText(getApplicationContext(), "No existe este usuario, por favor registrese", Toast.LENGTH_SHORT).show();
             }
         }
