@@ -1,6 +1,7 @@
 package com.example.cristianramirez.alcaldiareportes;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -14,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -22,12 +24,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -46,10 +51,14 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
     private TextView descripcion;
     private TextView ubicacion;
     private Button registro;
-    private Uri aux;
+    private String aux;
     private SharedPreferences session ;
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1 ;
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 2 ;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +75,6 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
         session = this.getSharedPreferences("Session",0);
 
         aceptar = false;
-
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -123,7 +131,8 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
             startActivityForResult(cameraIntent, 1);
         }
         if(v.getId()==R.id.btnregistro) {
-            if(aceptar==false || descripcion.getText().toString().trim().equals("")){
+            if(aceptar==false || descripcion.getText().toString().trim().equals("")
+                    || ubicacion.getText().toString().trim().equals("")){
                 Toast.makeText(getApplicationContext(), "Complete todos los campos y anexe una fotografia para poder completar el registro", Toast.LENGTH_SHORT).show();
             }else{
                 AccesoRemoto a = new AccesoRemoto();
@@ -141,14 +150,15 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
             String h = Environment.getExternalStorageDirectory().getAbsolutePath() +
                     "/Tutorialeshtml5/" + "foto.jpg";
             Log.e("onActivityResultaa: ", h);
-            Bitmap imagens = BitmapFactory.decodeFile(h);
+
 
             File image = new File(h);
 
             Uri uriSavedImage = Uri.fromFile(image);
-            aux=uriSavedImage;
-            //Añadimos el bitmap al imageView para
-            //mostrarlo por pantalla
+
+            aux=h;
+
+
             img.setImageURI(uriSavedImage);
 
 
@@ -193,6 +203,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
             String linea = "";
             int respuesta = 0;
             StringBuilder result = null;
+            JSONObject jsonSesion;
             Log.e("doInBackground: ","entro");
             try {
 
@@ -201,21 +212,31 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
                 conection.setRequestMethod("POST");
 
 
-                String data ="{\n" +
-                        "        \"tipo\":\""+"reporte"+"\",\n" +
-                        "        \"imagen\":\""+ aux +"\"\n" +
-                        "        \"usuario\":\""+ session.getInt("id",99999)+"\"\n" +
-                        "    }";
 
-                Log.e("data:",data);
-                URLEncoder.encode(data, "UTF-8");
+                jsonSesion = new JSONObject();
+                try{
+                    // Construimos el JSON.
+
+                    jsonSesion.accumulate("tipo", "reporte");
+                    jsonSesion.accumulate("mensaje", descripcion.getText());
+                    jsonSesion.accumulate("ubicacion",  ubicacion.getText());
+                    jsonSesion.accumulate("usuario", session.getInt("id",99999));
+                    jsonSesion.accumulate("imagen",aux);
+
+
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(),e.getMessage() , Toast.LENGTH_LONG).show();
+                }
+
+                Log.e("data:",jsonSesion.toString());
+                URLEncoder.encode(jsonSesion.toString(), "UTF-8");
 
                 conection.setDoOutput(true);
-                conection.setFixedLengthStreamingMode(data.getBytes().length);
+                conection.setFixedLengthStreamingMode(jsonSesion.toString().getBytes().length);
                 conection.setRequestProperty("Content-Type", "application/json");
 
                 OutputStream out = new BufferedOutputStream(conection.getOutputStream());
-                out.write(data.getBytes());
+                out.write(jsonSesion.toString().getBytes());
                 out.flush();
                 out.close();
 

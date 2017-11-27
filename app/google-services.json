@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "640592235565",
-    "firebase_url": "https://movilesalcaldia2017.firebaseio.com",
-    "project_id": "movilesalcaldia2017",
-    "storage_bucket": "movilesalcaldia2017.appspot.com"
+    "project_number": "76417033990",
+    "firebase_url": "https://knowing-e55da.firebaseio.com",
+    "project_id": "knowing-e55da",
+    "storage_bucket": "knowing-e55da.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:640592235565:android:d66d7685df394d81",
+        "mobilesdk_app_id": "1:76417033990:android:d66d7685df394d81",
         "android_client_info": {
           "package_name": "com.example.cristianramirez.alcaldiareportes"
         }
       },
       "oauth_client": [
         {
-          "client_id": "640592235565-fauvs07u4ifcfievkauus50q1gbs3q7e.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.cristianramirez.alcaldiareportes",
-            "certificate_hash": "7a9e2f45531fcfe4b966bb0305d45a873d94dfe3"
-          }
-        },
-        {
-          "client_id": "640592235565-fe22hdh11sal97ithr65btoppvfgj164.apps.googleusercontent.com",
+          "client_id": "76417033990-2d7l6md95etuntmdukb9j417sgoj966q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDMilz60zzZ5diM9Igb-KhxpNsQ-kq9Ycw"
+          "current_key": "AIzaSyCWNjjAFW4zJAUzLmMGdtQqK08jfym1wuQ"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "640592235565-fe22hdh11sal97ithr65btoppvfgj164.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

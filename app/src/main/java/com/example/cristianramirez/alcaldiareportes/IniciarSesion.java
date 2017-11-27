@@ -129,17 +129,23 @@ public class IniciarSesion extends AppCompatActivity implements View.OnClickList
                     JSONObject prueba2 = new JSONObject(datosSesion);
 
                     int id = prueba2.getInt("id");
-                    String aux = prueba2.getString("usuario");
-                    SharedPreferences.Editor edit = session.edit();
-                    edit.putInt("id",id);
-                    edit.putString("user",aux);
-                    edit.commit(); //Guardar cambios.
-                    i = new Intent(getApplicationContext(), MenuPrincipal.class);
-                    startActivity(i);
+                    if(id!=0){
+                        String aux = prueba2.getString("usuario");
+                        SharedPreferences.Editor edit = session.edit();
+                        edit.putInt("id",id);
+                        edit.putString("user",aux);
+                        edit.commit(); //Guardar cambios.
+                        i = new Intent(getApplicationContext(), MenuPrincipal.class);
+                        startActivity(i);
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Datos Erroneos", Toast.LENGTH_SHORT).show();
+
+                    }
+
                 }catch (Exception e){}
             }else{
 
-                Toast.makeText(getApplicationContext(), "No existe este usuario, por favor registrese", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Datos Erroneos", Toast.LENGTH_SHORT).show();
             }
         }
     }

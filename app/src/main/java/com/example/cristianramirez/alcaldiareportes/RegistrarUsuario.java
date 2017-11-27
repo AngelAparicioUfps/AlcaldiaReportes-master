@@ -86,6 +86,7 @@ public class RegistrarUsuario extends AppCompatActivity implements View.OnClickL
                         "        \"correo\":\""+txtCor.getText()+"\",\n" +
                         "        \"telefono\":\""+txtTel.getText()+"\",\n" +
                         "        \"nombre\":\""+txtNom.getText()+"\",\n" +
+                        "        \"tipo\":\""+"cliente"+"\",\n" +
                         "        \"usuario\":\""+txtApe.getText()+"\"\n" +
                         "    }";
 
