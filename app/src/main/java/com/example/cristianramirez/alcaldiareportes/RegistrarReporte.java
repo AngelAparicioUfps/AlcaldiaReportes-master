@@ -24,6 +24,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -39,24 +44,27 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Random;
 
 public class RegistrarReporte extends AppCompatActivity implements View.OnClickListener {
     private Button bt_hacerfoto;
 
     private ImageView img;
     private boolean aceptar;
-
+    boolean a = true;
     private TextView archi;
 
     private TextView descripcion;
     private TextView ubicacion;
     private Button registro;
-    private String aux;
+    private Uri aux;
     private SharedPreferences session ;
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1 ;
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 2 ;
 
-
+    private StorageReference myStoorage;
+    String ruta;
+    final Random myrandom = new Random(10);
 
 
     @Override
@@ -73,7 +81,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
         bt_hacerfoto.setOnClickListener(this);
         registro.setOnClickListener(this);
         session = this.getSharedPreferences("Session",0);
-
+        myStoorage = FirebaseStorage.getInstance().getReference();
         aceptar = false;
 
         if (ContextCompat.checkSelfPermission(this,
@@ -135,6 +143,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
                     || ubicacion.getText().toString().trim().equals("")){
                 Toast.makeText(getApplicationContext(), "Complete todos los campos y anexe una fotografia para poder completar el registro", Toast.LENGTH_SHORT).show();
             }else{
+                Toast.makeText(getApplicationContext(),"Cargando...", Toast.LENGTH_LONG).show();
                 AccesoRemoto a = new AccesoRemoto();
                 a.execute();
             }
@@ -156,7 +165,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
 
             Uri uriSavedImage = Uri.fromFile(image);
 
-            aux=h;
+            aux=uriSavedImage;
 
 
             img.setImageURI(uriSavedImage);
@@ -204,7 +213,22 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
             int respuesta = 0;
             StringBuilder result = null;
             JSONObject jsonSesion;
+
             Log.e("doInBackground: ","entro");
+
+            StorageReference failpatch = myStoorage.child("fotos").child(aux.getLastPathSegment());
+            failpatch.putFile(aux).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                   ruta = taskSnapshot.getDownloadUrl().getPath();
+                 a=false;}
+            });
+
+            while(a){
+                Log.e( "doInBackground: ","cargandouu" );
+            }
+
             try {
 
                 url = new URL("http://gidis.ufps.edu.co:8088/CucutaRYP/api/publicacion");
@@ -221,7 +245,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
                     jsonSesion.accumulate("mensaje", descripcion.getText());
                     jsonSesion.accumulate("ubicacion",  ubicacion.getText());
                     jsonSesion.accumulate("usuario", session.getInt("id",99999));
-                    jsonSesion.accumulate("imagen",aux);
+                    jsonSesion.accumulate("imagen",ruta);
 
 
                 }catch (Exception e){
