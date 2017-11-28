@@ -64,7 +64,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
 
     private StorageReference myStoorage;
     String ruta;
-    final Random myrandom = new Random(10);
+    double valorDado;
 
 
     @Override
@@ -122,6 +122,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if(v.getId()==R.id.hacerfoto) {
 //Creamos el Intent para llamar a la Camara
+            valorDado = (Math.floor(Math.random()*7)+1)*(Math.floor(Math.random()*9)+1)*(Math.floor(Math.random()*8)+1)*((Math.floor(Math.random()*6)+1)*(Math.floor(Math.random()*8)+1));
             Intent cameraIntent = new Intent(
                     android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             //Creamos una carpeta en la memeria del terminal
@@ -129,7 +130,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
                     Environment.getExternalStorageDirectory(), "Tutorialeshtml5");
             imagesFolder.mkdirs();
             //añadimos el nombre de la imagen
-            File image = new File(imagesFolder, "foto.jpg");
+            File image = new File(imagesFolder, valorDado+"foto.jpg");
 
             Uri uriSavedImage = Uri.fromFile(image);
             //Le decimos al Intent que queremos grabar la imagen
@@ -157,7 +158,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
             //Creamos un bitmap con la imagen recientemente
             //almacenada en la memoria
             String h = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                    "/Tutorialeshtml5/" + "foto.jpg";
+                    "/Tutorialeshtml5/" +valorDado+"foto.jpg";
             Log.e("onActivityResultaa: ", h);
 
 
