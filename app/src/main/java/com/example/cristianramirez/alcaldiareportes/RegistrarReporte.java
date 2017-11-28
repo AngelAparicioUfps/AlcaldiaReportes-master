@@ -122,7 +122,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if(v.getId()==R.id.hacerfoto) {
 //Creamos el Intent para llamar a la Camara
-            valorDado = (Math.floor(Math.random()*7)+1)*(Math.floor(Math.random()*9)+1)*(Math.floor(Math.random()*8)+1)*((Math.floor(Math.random()*6)+1)*(Math.floor(Math.random()*8)+1));
+            valorDado = (Math.floor(Math.random()*7)+1)*(Math.floor(Math.random()*9)+1)*(Math.floor(Math.random()*2)+1)*(Math.floor(Math.random()*8)+1)*((Math.floor(Math.random()*6)+1)*(Math.floor(Math.random()*8)+1));
             Intent cameraIntent = new Intent(
                     android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             //Creamos una carpeta en la memeria del terminal
@@ -144,7 +144,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
                     || ubicacion.getText().toString().trim().equals("")){
                 Toast.makeText(getApplicationContext(), "Complete todos los campos y anexe una fotografia para poder completar el registro", Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(getApplicationContext(),"Cargando...", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Cargando, esto puede tardar unos segundos...", Toast.LENGTH_LONG).show();
                 AccesoRemoto a = new AccesoRemoto();
                 a.execute();
             }
@@ -221,10 +221,13 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
             failpatch.putFile(aux).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Uri auxiliar = taskSnapshot.getDownloadUrl();
+                ruta = auxiliar.toString();
+                    a=false;
 
-                   ruta = taskSnapshot.getDownloadUrl().getPath();
-                 a=false;}
+                ;}
             });
+
 
             while(a){
                 Log.e( "doInBackground: ","cargandouu" );
