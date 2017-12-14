@@ -55,7 +55,7 @@ public class IniciarSesion extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(getApplicationContext(), "Por favor llene los campos", Toast.LENGTH_SHORT).show();
 
             }else{
-
+                Toast.makeText(getApplicationContext(), "Validando Los Datos..", Toast.LENGTH_SHORT).show();
                 AccesoRemoto a = new AccesoRemoto();
                 a.execute();
             }

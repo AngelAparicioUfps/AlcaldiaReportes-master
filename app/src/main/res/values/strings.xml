@@ -3,25 +3,27 @@
 
 
     <string-array name="lista_propuesta">
-        <item>Movilidad</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+        <item>Todas</item>
+        <item>Carreteras intermunicipales</item>
+        <item>Espacio Publico</item>
+        <item>Autopistas</item>
+        <item>Alcantarillados</item>
+        <item>Alumbrado publico</item>
+        <item>Servicios de luz</item>
+        <item>Servicios de agua</item>
+        <item>Servicios de gas</item>
     </string-array>
 
     <string-array name="lista_reporte">
-        <item>Calidad</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+        <item>Todas</item>
+        <item>Carreteras intermunicipales</item>
+        <item>Espacio Publico</item>
+        <item>Autopistas</item>
+        <item>Alcantarillados</item>
+        <item>Alumbrado publico</item>
+        <item>Servicios de luz</item>
+        <item>Servicios de agua</item>
+        <item>Servicios de gas</item>
     </string-array>
     <string name="title_activity_menu_principal">Menu Principal</string>
 

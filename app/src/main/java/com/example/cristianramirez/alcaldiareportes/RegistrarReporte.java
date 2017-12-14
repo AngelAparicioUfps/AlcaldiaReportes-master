@@ -131,7 +131,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
             imagesFolder.mkdirs();
             //añadimos el nombre de la imagen
             File image = new File(imagesFolder, valorDado+"foto.jpg");
-
+            ruta=valorDado+"foto.jpg";
             Uri uriSavedImage = Uri.fromFile(image);
             //Le decimos al Intent que queremos grabar la imagen
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -222,7 +222,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Uri auxiliar = taskSnapshot.getDownloadUrl();
-                ruta = auxiliar.toString();
+                //ruta = auxiliar.toString();
                     a=false;
 
                 ;}

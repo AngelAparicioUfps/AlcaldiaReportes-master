@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\acer\Desktop\Knowingmycity\ knowing-my-city.iml" filepath="C:\Users\acer\Desktop\Knowingmycity\ knowing-my-city.iml" />
-      <module fileurl="file://C:\Users\acer\Desktop\ knowing-my-city\AlcaldiaReportes-master.iml" filepath="C:\Users\acer\Desktop\ knowing-my-city\AlcaldiaReportes-master.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Knowingmycity.iml" filepath="$PROJECT_DIR$/Knowingmycity.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iNTENTO.iml" filepath="$PROJECT_DIR$/iNTENTO.iml" />
     </modules>
   </component>
 </project>

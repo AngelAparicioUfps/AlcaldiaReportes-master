@@ -122,7 +122,7 @@ public class RegistrarPropuesta extends AppCompatActivity implements View.OnClic
             imagesFolder.mkdirs();
             //añadimos el nombre de la imagen
             File image = new File(imagesFolder, valorDado+"foto.jpg");
-
+            ruta=valorDado+"foto.jpg";
             Uri uriSavedImage = Uri.fromFile(image);
             //Le decimos al Intent que queremos grabar la imagen
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -213,7 +213,7 @@ public class RegistrarPropuesta extends AppCompatActivity implements View.OnClic
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                    ruta = taskSnapshot.getDownloadUrl().toString();
+                    //ruta = taskSnapshot.getDownloadUrl().toString();
                     a=false;}
             });
 
