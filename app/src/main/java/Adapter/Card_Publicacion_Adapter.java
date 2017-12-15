@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class Card_Publicacion_Adapter  extends RecyclerView.Adapter<Card_Publica
     public Bitmap aux=null;
     public boolean cargada = true;
     private FirebaseAuth mAuth;
-    ImageView imagensita;
+
 
     public Card_Publicacion_Adapter(Context context, ArrayList<Card_Publicacion> cardsList) {
         this.context = context;
@@ -75,8 +76,7 @@ public class Card_Publicacion_Adapter  extends RecyclerView.Adapter<Card_Publica
         String ubicacion = cardsList.get(position).getUbicacion();
         int megusta = cardsList.get(position).getMegusta();
         int comentarios = 8;
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReferenceFromUrl(rutaimagen);
+
 
         TextView tipopropuesta = holder.tipoPropuesta;
         TextView descripcions = holder.descripcion;
@@ -84,7 +84,7 @@ public class Card_Publicacion_Adapter  extends RecyclerView.Adapter<Card_Publica
         TextView megustas = holder.megusta;
         TextView comentarioss = holder.comentarios;
         CheckableImageButton ubicacions = holder.ubicacion;
-       imagensita = holder.imagen;
+        ImageView imagensita= holder.imagen;
         CheckableImageButton mgs =holder.mg;
 
         CheckableImageButton coms = holder.com;
@@ -94,10 +94,9 @@ public class Card_Publicacion_Adapter  extends RecyclerView.Adapter<Card_Publica
         fechas.setText(fecha);
         megustas.setText(megusta+" Me Gusta");
         comentarioss.setText(comentarios+" Comentarios");
-        AccesoRemoto a = new AccesoRemoto(rutaimagen,storageRef);
-        a.execute();
+        Log.e("onBindViewHolder: ",rutaimagen);
+        Picasso.with(context).load(rutaimagen).into(imagensita);
 
-        imagensita.setImageBitmap(aux);
 
     }
 
@@ -141,39 +140,5 @@ public class Card_Publicacion_Adapter  extends RecyclerView.Adapter<Card_Publica
 
         }
     }
-    private class AccesoRemoto extends AsyncTask<Void, Void, String> {
- private String ruta ="";
- private StorageReference storageRef;
-        String a = "";
-        public AccesoRemoto(String ruta,StorageReference stor) {
-            this.ruta=ruta;
-            this.storageRef=stor;
-        }
 
-        protected String doInBackground(Void... argumentos) {
-            try {
-                final long ONE_MEGABYTE = 1024 * 1024*10;
-                storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                    @Override
-                    public void onSuccess(byte[] bytes) {
-                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                        imagensita.setImageBitmap(bitmap);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
-                    }
-                });
-            } catch (Exception e ) {}
-
-            return "";
-        }
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            cargada=false;
-        }
-
-
-    }
 }

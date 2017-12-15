@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,7 +62,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
     private SharedPreferences session ;
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1 ;
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 2 ;
-
+    Spinner tipo;
     private StorageReference myStoorage;
     String ruta;
     double valorDado;
@@ -83,7 +84,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
         session = this.getSharedPreferences("Session",0);
         myStoorage = FirebaseStorage.getInstance().getReference();
         aceptar = false;
-
+        tipo=(Spinner) findViewById(R.id.spis);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -246,7 +247,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
                     // Construimos el JSON.
 
                     jsonSesion.accumulate("tipo", "reporte");
-                    jsonSesion.accumulate("mensaje", descripcion.getText());
+                    jsonSesion.accumulate("mensaje", descripcion.getText()+"/"+tipo.getSelectedItem().toString());
                     jsonSesion.accumulate("ubicacion",  ubicacion.getText());
                     jsonSesion.accumulate("usuario", session.getInt("id",99999));
                     jsonSesion.accumulate("imagen",ruta);

@@ -3,7 +3,7 @@
 
 
     <string-array name="lista_propuesta">
-        <item>Todas</item>
+
         <item>Carreteras intermunicipales</item>
         <item>Espacio Publico</item>
         <item>Autopistas</item>

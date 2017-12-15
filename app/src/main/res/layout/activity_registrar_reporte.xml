@@ -102,10 +102,10 @@
                         android:text="Tipo de reporte:" />
 
                     <Spinner
-                        android:id="@+id/planets_spinner"
+                        android:id="@+id/spis"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:entries="@array/lista_reporte" />
+                        android:entries="@array/lista_propuesta" />
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"

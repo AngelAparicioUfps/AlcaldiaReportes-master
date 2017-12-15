@@ -43,9 +43,10 @@
 
                     <Spinner
 
+                        android:id="@+id/listarrpropuesta"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:entries="@array/lista_propuesta"
+                        android:entries="@array/lista_reporte"
                         android:paddingBottom="10dp" />
 
                     <LinearLayout
