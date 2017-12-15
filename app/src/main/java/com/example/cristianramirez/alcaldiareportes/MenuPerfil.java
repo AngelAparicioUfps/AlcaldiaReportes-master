@@ -80,11 +80,12 @@ public class MenuPerfil extends Fragment {
                 boolean validar = jsonObject.getBoolean("validacion");
                 Log.e( "initCardsV: ",validar+"" );
                 String tipito =  jsonObject.getString("tipo");
-
+                String[] auxi = jsonObject.getString("mensaje").split("/");
                 if(validar){
                     if(tipito.equalsIgnoreCase("propuesta")){
+
                         Log.e( "initCards: ",i+"");
-                        card.setTipo("Modalidad no elegida");
+                        card.setTipo(auxi[1].toString());
                         Log.e( "initCards: ",card.getTipo());
                         card.setFecha(jsonObject.getString("fecha"));
                         Log.e( "initCards: ",i+"");
@@ -99,9 +100,10 @@ public class MenuPerfil extends Fragment {
                         Log.e( "initCards: ",card.getUbicacion());
                         card.setImagenRuta(jsonObject.getString("imagen"));
                         Log.e( "initCards: ",card.getImagenRuta());
-                        card.setMensaje(jsonObject.getString("mensaje"));
+                        card.setMensaje(auxi[0].toString());
                         Log.e( "initCards: ",card.getMensaje());
                         cardsList.add(card);
+
                     }
                 }
 

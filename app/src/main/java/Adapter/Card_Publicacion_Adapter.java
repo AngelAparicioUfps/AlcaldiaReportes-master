@@ -90,7 +90,7 @@ public class Card_Publicacion_Adapter  extends RecyclerView.Adapter<Card_Publica
         CheckableImageButton coms = holder.com;
 
         tipopropuesta.setText(tipo);
-        descripcions.setText(descripcion + " En el lugar : " + ubicacion);
+        descripcions.setText(descripcion);
         fechas.setText(fecha);
         megustas.setText(megusta+" Me Gusta");
         comentarioss.setText(comentarios+" Comentarios");
