@@ -50,6 +50,7 @@ public class Card_Publicacion_Adapter  extends RecyclerView.Adapter<Card_Publica
     public Bitmap aux=null;
     public boolean cargada = true;
     private FirebaseAuth mAuth;
+    ImageView imagensita;
 
     public Card_Publicacion_Adapter(Context context, ArrayList<Card_Publicacion> cardsList) {
         this.context = context;
@@ -75,7 +76,7 @@ public class Card_Publicacion_Adapter  extends RecyclerView.Adapter<Card_Publica
         int megusta = cardsList.get(position).getMegusta();
         int comentarios = 8;
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReferenceFromUrl("gs://knowing-e55da.appspot.com").child(rutaimagen);
+        StorageReference storageRef = storage.getReferenceFromUrl(rutaimagen);
 
         TextView tipopropuesta = holder.tipoPropuesta;
         TextView descripcions = holder.descripcion;
@@ -83,7 +84,7 @@ public class Card_Publicacion_Adapter  extends RecyclerView.Adapter<Card_Publica
         TextView megustas = holder.megusta;
         TextView comentarioss = holder.comentarios;
         CheckableImageButton ubicacions = holder.ubicacion;
-        ImageView imagensita = holder.imagen;
+       imagensita = holder.imagen;
         CheckableImageButton mgs =holder.mg;
 
         CheckableImageButton coms = holder.com;
@@ -151,20 +152,20 @@ public class Card_Publicacion_Adapter  extends RecyclerView.Adapter<Card_Publica
 
         protected String doInBackground(Void... argumentos) {
             try {
-                final File localFile = File.createTempFile("images", "jpg");
-                storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                final long ONE_MEGABYTE = 1024 * 1024*10;
+                storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                     @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        aux=bitmap;
-
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        imagensita.setImageBitmap(bitmap);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
                     }
                 });
-            } catch (IOException e ) {}
+            } catch (Exception e ) {}
 
             return "";
         }

@@ -222,7 +222,7 @@ public class RegistrarReporte extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Uri auxiliar = taskSnapshot.getDownloadUrl();
-                //ruta = auxiliar.toString();
+                ruta = auxiliar.toString();
                     a=false;
 
                 ;}

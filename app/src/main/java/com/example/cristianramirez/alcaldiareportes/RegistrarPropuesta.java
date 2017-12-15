@@ -213,7 +213,7 @@ public class RegistrarPropuesta extends AppCompatActivity implements View.OnClic
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                    //ruta = taskSnapshot.getDownloadUrl().toString();
+                    ruta = taskSnapshot.getDownloadUrl().toString();
                     a=false;}
             });
 
