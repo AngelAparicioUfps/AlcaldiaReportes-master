@@ -2,6 +2,7 @@ package com.example.cristianramirez.alcaldiareportes;
 
 
 import android.content.SharedPreferences;
+import android.media.MediaCas;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -42,6 +43,7 @@ public class MenuPerfil extends Fragment {
     TextView perfil;
     private SharedPreferences session ;
     private JSONArray areglo;
+    int user;
 
 
     public MenuPerfil() {
@@ -59,6 +61,7 @@ public class MenuPerfil extends Fragment {
             perfil= (TextView) v.findViewById(R.id.perfil);
             session = this.getActivity().getSharedPreferences("Session",0);
             perfil.setText(session.getString("user",null));
+            user = session.getInt("id",0);
            AccesoRemoto aux = new AccesoRemoto();
             aux.execute();
             if (adapter == null) {
@@ -81,28 +84,32 @@ public class MenuPerfil extends Fragment {
                 Log.e( "initCardsV: ",validar+"" );
                 String tipito =  jsonObject.getString("tipo");
                 String[] auxi = jsonObject.getString("mensaje").split("/");
+                int usuario = jsonObject.getInt("usuario");
                 if(validar){
                     if(tipito.equalsIgnoreCase("propuesta")){
+                        if(user==usuario){
+                            Log.e( "initCards: ",i+"");
+                            card.setTipo(auxi[1].toString());
+                            Log.e( "initCards: ",card.getTipo());
+                            card.setFecha(jsonObject.getString("fecha"));
+                            Log.e( "initCards: ",i+"");
+                            card.setId(jsonObject.getInt("id")+"");
+                            Log.e( "initCards: ",card.getFecha());
+                            card.setUsuario(jsonObject.getInt("usuario")+"");
+                            Log.e( "initCards: ",card.getUsuario());
+                            card.setMegusta((int) jsonObject.getInt("meGusta"));
+                            Log.e( "initCards: ",card.getMegusta()+"");
+                            //card.setComentarios(comentarios);
+                            card.setUbicacion(jsonObject.getString("ubicacion"));
+                            Log.e( "initCards: ",card.getUbicacion());
+                            card.setImagenRuta(jsonObject.getString("imagen"));
+                            Log.e( "initCards: ",card.getImagenRuta());
+                            card.setMensaje(auxi[0].toString());
+                            Log.e( "initCards: ",card.getMensaje());
+                            cardsList.add(card);
+                        }
 
-                        Log.e( "initCards: ",i+"");
-                        card.setTipo(auxi[1].toString());
-                        Log.e( "initCards: ",card.getTipo());
-                        card.setFecha(jsonObject.getString("fecha"));
-                        Log.e( "initCards: ",i+"");
-                        card.setId(jsonObject.getInt("id")+"");
-                        Log.e( "initCards: ",card.getFecha());
-                        card.setUsuario(jsonObject.getInt("usuario")+"");
-                        Log.e( "initCards: ",card.getUsuario());
-                        card.setMegusta((int) jsonObject.getInt("meGusta"));
-                        Log.e( "initCards: ",card.getMegusta()+"");
-                        //card.setComentarios(comentarios);
-                        card.setUbicacion(jsonObject.getString("ubicacion"));
-                        Log.e( "initCards: ",card.getUbicacion());
-                        card.setImagenRuta(jsonObject.getString("imagen"));
-                        Log.e( "initCards: ",card.getImagenRuta());
-                        card.setMensaje(auxi[0].toString());
-                        Log.e( "initCards: ",card.getMensaje());
-                        cardsList.add(card);
+
 
                     }
                 }
